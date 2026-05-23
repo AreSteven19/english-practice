@@ -15,12 +15,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={geist.className}>
-      <body className="bg-zinc-950 text-white">
+      <body className="bg-zinc-950 text-white antialiased">
         <div className="flex min-h-screen">
 
           <Sidebar />
 
-          <main className="flex-1 p-6 overflow-auto">
+          <main className="flex-1 p-6 pt-20 lg:pt-6 overflow-auto">
             {children}
           </main>
 
