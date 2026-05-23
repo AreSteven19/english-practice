@@ -8,6 +8,7 @@ import {
   X,
   Headphones,
   Pen,
+  BookOpen,
   LayoutDashboard,
   ChevronLeft,
   ChevronRight,
@@ -19,6 +20,11 @@ const practiceItems = [
   { href: '/writing', label: 'Writing', icon: Pen },
 ];
 
+const moduleItems = [
+  { href: '/module1', label: 'Modulo1', icon: BookOpen },
+  { href: '/module2', label: 'Modulo2', icon: BookOpen },
+];
+
 const isPracticeRoute = (path) => path === '/listening' || path === '/writing';
 
 export default function Sidebar() {
@@ -26,6 +32,7 @@ export default function Sidebar() {
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [practiceOpen, setPracticeOpen] = useState(isPracticeRoute(pathname));
+  const [modulesOpen, setModulesOpen] = useState(false);
 
   const closeMobile = () => setMobileOpen(false);
   const isActive = (href) => pathname === href;
@@ -138,6 +145,40 @@ export default function Sidebar() {
                   </div>
                 </div>
               </div>
+
+              <div>
+  <button
+    onClick={() => setModulesOpen(!modulesOpen)}
+    className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-semibold uppercase tracking-wider text-zinc-500 hover:text-zinc-300 transition-colors"
+  >
+    <ChevronDown
+      className={`w-3.5 h-3.5 transition-transform duration-200 ${
+        modulesOpen ? '' : '-rotate-90'
+      }`}
+    />
+    Modulos
+  </button>
+
+  <div
+    className={`
+      overflow-hidden transition-all duration-300 ease-in-out
+      ${modulesOpen ? 'max-h-40 opacity-100 mt-0.5' : 'max-h-0 opacity-0'}
+    `}
+  >
+    <div className="ml-1 space-y-0.5 border-l border-zinc-800 pl-3">
+      {moduleItems.map((item) => (
+        <TextNavLink
+          key={item.href}
+          href={item.href}
+          label={item.label}
+          icon={item.icon}
+          active={isActive(item.href)}
+          onClick={closeMobile}
+        />
+      ))}
+    </div>
+  </div>
+</div>
 
               <TextNavLink
                 href="/dashboard"
