@@ -1,13 +1,13 @@
-export default function HomePage() {
+export default function DashboardPage() {
   return (
     <div className="flex flex-col gap-4">
 
       <h1 className="text-4xl font-bold">
-        English Practice App
+        Dashboard
       </h1>
 
       <p className="text-zinc-400">
-        Improve your listening and writing skills with AI-powered exercises.
+        Track your progress and statistics.
       </p>
 
     </div>

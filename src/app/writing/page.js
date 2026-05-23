@@ -1,13 +1,13 @@
-export default function HomePage() {
+export default function WritingPage() {
   return (
     <div className="flex flex-col gap-4">
 
       <h1 className="text-4xl font-bold">
-        English Practice App
+        Writing Practice
       </h1>
 
       <p className="text-zinc-400">
-        Improve your listening and writing skills with AI-powered exercises.
+        Improve spelling, dictation, and sentence writing.
       </p>
 
     </div>

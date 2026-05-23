@@ -1,13 +1,13 @@
-export default function HomePage() {
+export default function ListeningPage() {
   return (
     <div className="flex flex-col gap-4">
 
       <h1 className="text-4xl font-bold">
-        English Practice App
+        Listening Practice
       </h1>
 
       <p className="text-zinc-400">
-        Improve your listening and writing skills with AI-powered exercises.
+        Practice emails, phone numbers, addresses, and names.
       </p>
 
     </div>
