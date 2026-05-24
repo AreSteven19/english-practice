@@ -21,8 +21,8 @@ const practiceItems = [
 ];
 
 const moduleItems = [
-  { href: '/module1', label: 'Modulo1', icon: BookOpen },
-  { href: '/module2', label: 'Modulo2', icon: BookOpen },
+  { href: '/modulo1', label: 'Modulo1', icon: BookOpen },
+  { href: '/modulo2', label: 'Personal Interest', icon: BookOpen },
 ];
 
 const isPracticeRoute = (path) => path === '/listening' || path === '/writing';
