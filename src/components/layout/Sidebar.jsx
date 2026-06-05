@@ -14,12 +14,14 @@ import {
   ChevronRight,
   ChevronDown,
   LogOut,
+  Newspaper,
 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 
 const practiceItems = [
   { href: '/listening', label: 'Listening', icon: Headphones },
   { href: '/writing', label: 'Writing', icon: Pen },
+  { href: '/flashcards', label: 'Flashcards', icon: Newspaper }
 ];
 
 const moduleItems = [

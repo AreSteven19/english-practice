@@ -18,6 +18,12 @@ const cards = [
     icon: Pen,
   },
   {
+    href: "/flashcards",
+    label: "Flashcards",
+    desc: "Practice vocabulary with cards",
+    icon: BookOpen,
+  },
+  {
     href: "/modulo1",
     label: "Module 1",
     desc: "Structured learning with units and exercises",
