@@ -1,15 +1,21 @@
+"use client";
+
+import { supabase } from "../lib/supabase";
+
 export default function WritingPage() {
+  const handleRegister = async () => {
+    const { data, error } = await supabase.auth.signUp({
+      email: "correo_real_distinto@gmail.com",
+      password: "12345678"
+    });
+
+    console.log("DATA", data);
+    console.log("ERROR", error);
+  };
+
   return (
-    <div className="flex flex-col gap-4">
-
-      <h1 className="text-4xl font-bold">
-        Writing Practice
-      </h1>
-
-      <p className="text-zinc-400">
-        Improve spelling, dictation, and sentence writing.
-      </p>
-
-    </div>
+    <button onClick={handleRegister} className="px-4 py-2 ">
+      Test Register
+    </button>
   );
 }
