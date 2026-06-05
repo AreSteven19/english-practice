@@ -1,74 +1,46 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { supabase } from "@/app/lib/supabase";
+import { useAuth } from "@/context/AuthContext";
 import Sidebar from "@/components/layout/Sidebar";
 
+const publicRoutes = ["/login", "/register"];
+
 export default function AuthGuard({ children }) {
-  const [loading, setLoading] = useState(true);
-  const [session, setSession] = useState(null);
-
-  const router = useRouter();
+  const { session, loading } = useAuth();
   const pathname = usePathname();
+  const router = useRouter();
 
-  useEffect(() => {
-    const checkSession = async () => {
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
-
-      setSession(session);
-      setLoading(false);
-
-      if (!session && pathname !== "/login") {
-        router.replace("/login");
-      }
-
-      if (session && pathname === "/login") {
-        router.replace("/");
-      }
-    };
-
-    checkSession();
-
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-
-      if (!session) {
-        router.replace("/login");
-      } else if (pathname === "/login") {
-        router.replace("/");
-      }
-    });
-
-    return () => subscription.unsubscribe();
-  }, [router, pathname]);
+  const isPublic = publicRoutes.includes(pathname);
 
   if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        Loading...
+        <div className="flex flex-col items-center gap-3">
+          <div className="h-8 w-8 animate-spin rounded-full border-4 border-zinc-700 border-t-indigo-500" />
+          <p className="text-sm text-zinc-500">Loading...</p>
+        </div>
       </div>
     );
   }
 
-  // Permitir que la página de login se vea sin sesión
-  if (!session && pathname === "/login") {
-    return children;
+  if (!session && !isPublic) {
+    router.replace("/login");
+    return null;
   }
 
-  // Mientras redirige
-  if (!session) {
+  if (session && isPublic) {
+    router.replace("/dashboard");
     return null;
+  }
+
+  if (isPublic) {
+    return <>{children}</>;
   }
 
   return (
     <div className="flex min-h-screen">
       <Sidebar />
-
       <main className="flex-1 overflow-auto p-6 pt-20 lg:pt-6">
         {children}
       </main>

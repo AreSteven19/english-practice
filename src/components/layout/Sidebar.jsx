@@ -13,7 +13,9 @@ import {
   ChevronLeft,
   ChevronRight,
   ChevronDown,
+  LogOut,
 } from 'lucide-react';
+import { useAuth } from '@/context/AuthContext';
 
 const practiceItems = [
   { href: '/listening', label: 'Listening', icon: Headphones },
@@ -29,6 +31,7 @@ const isPracticeRoute = (path) => path === '/listening' || path === '/writing';
 
 export default function Sidebar() {
   const pathname = usePathname();
+  const { user, logout } = useAuth();
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [practiceOpen, setPracticeOpen] = useState(isPracticeRoute(pathname));
@@ -191,7 +194,12 @@ export default function Sidebar() {
           )}
         </nav>
 
-        <div className="border-t border-zinc-800/50 p-3 shrink-0">
+        <div className="border-t border-zinc-800/50 p-3 shrink-0 space-y-1">
+          {!collapsed && user?.email && (
+            <div className="px-3 py-2 text-xs text-zinc-500 truncate">
+              {user.email}
+            </div>
+          )}
           <button
             onClick={() => setCollapsed(!collapsed)}
             className="hidden lg:flex items-center justify-center gap-2 w-full px-3 py-2 rounded-lg text-sm text-zinc-500 hover:text-white hover:bg-zinc-800 transition-colors"
@@ -205,6 +213,23 @@ export default function Sidebar() {
               </>
             )}
           </button>
+          {collapsed ? (
+            <button
+              onClick={logout}
+              className="flex items-center justify-center w-full px-3 py-2 rounded-lg text-sm text-zinc-500 hover:text-red-400 hover:bg-zinc-800 transition-colors"
+              title="Logout"
+            >
+              <LogOut className="w-4 h-4" />
+            </button>
+          ) : (
+            <button
+              onClick={logout}
+              className="flex items-center justify-center gap-2 w-full px-3 py-2 rounded-lg text-sm text-zinc-500 hover:text-red-400 hover:bg-zinc-800 transition-colors"
+            >
+              <LogOut className="w-4 h-4" />
+              <span>Logout</span>
+            </button>
+          )}
         </div>
       </aside>
     </>

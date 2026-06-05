@@ -1,15 +1,5 @@
+import { redirect } from "next/navigation";
+
 export default function HomePage() {
-  return (
-    <div className="flex flex-col gap-4">
-
-      <h1 className="text-4xl font-bold">
-        English Practice App
-      </h1>
-
-      <p className="text-zinc-400">
-        Improve your listening and writing skills with AI-powered exercises.
-      </p>
-
-    </div>
-  );
+  redirect("/dashboard");
 }

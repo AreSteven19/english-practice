@@ -1,6 +1,7 @@
 import { Geist } from "next/font/google";
 import "./globals.css";
 
+import { AuthProvider } from "@/context/AuthContext";
 import AuthGuard from "@/components/auth/AuthGuard";
 
 const geist = Geist({
@@ -16,9 +17,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={geist.className}>
       <body className="bg-zinc-950 text-white antialiased">
-        <AuthGuard>
-          {children}
-        </AuthGuard>
+        <AuthProvider>
+          <AuthGuard>
+            {children}
+          </AuthGuard>
+        </AuthProvider>
       </body>
     </html>
   );
